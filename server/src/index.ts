@@ -55,6 +55,10 @@ if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   })
 }
 
+app.get('/', (_req, res) => {
+  res.send('Welcome to the API server!')
+})
+
 process.on('SIGTERM', async () => {
   console.log('SIGTERM received, shutting down gracefully')
   await prisma.$disconnect()
