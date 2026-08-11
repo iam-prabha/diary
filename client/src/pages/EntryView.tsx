@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { format, formatDistanceToNow } from 'date-fns'
-import { ArrowLeft, Pencil, Trash2, Download, MoreVertical } from 'lucide-react'
+import { ArrowLeft, Pencil, Trash2, Download, MoreVertical, X } from 'lucide-react'
 import { api } from '@/lib/api'
-import type { Entry } from '@/types'
+import type { Entry, Media } from '@/types'
 import { TagChip } from '@/components/tags/TagChip'
 import { MediaGallery } from '@/components/media/MediaGallery'
 import { ConfirmModal } from '@/components/ui/ConfirmModal'
@@ -11,6 +11,8 @@ import { useEntries } from '@/stores/useEntries'
 import { renderTipTapHTML } from '@/lib/tipTap'
 import { exportEntryAsJSON, exportEntryAsMarkdown } from '@/lib/export'
 import { Loading } from '@/components/ui/Loading'
+import { imagesFromContent } from '@/lib/media'
+import { deleteImage } from '@/lib/upload'
 
 export function EntryView() {
   const { id } = useParams<{ id: string }>()
@@ -20,6 +22,7 @@ export function EntryView() {
   const [loading, setLoading] = useState(true)
   const [showConfirm, setShowConfirm] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null)
 
   useEffect(() => {
     api.get(`/entries/${id}`)
@@ -28,7 +31,23 @@ export function EntryView() {
       .finally(() => setLoading(false))
   }, [id, navigate])
 
+  const galleryMedia = useMemo<Media[]>(() => {
+    if (!entry) return []
+    const contentUrls = new Set(imagesFromContent(entry.content).map(img => img.src))
+    return entry.media.filter(m => !contentUrls.has(m.url))
+  }, [entry])
+
+  const handleContentClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const img = (e.target as HTMLElement).closest?.('img')
+    if (img?.src) setLightboxSrc(img.src)
+  }
+
   const handleDelete = async () => {
+    if (entry) {
+      for (const img of imagesFromContent(entry.content)) {
+        if (img.publicId) void deleteImage(img.publicId)
+      }
+    }
     await api.delete(`/entries/${id}`)
     removeFromList(id!)
     navigate('/diary')
@@ -112,14 +131,38 @@ export function EntryView() {
       </header>
 
       <div
-        className="prose prose-lg max-w-none font-sans [&_h1]:font-serif-display [&_h2]:font-serif-display [&_h3]:font-serif-display"
+        className="prose prose-lg max-w-none font-sans [&_h1]:font-serif-display [&_h2]:font-serif-display [&_h3]:font-serif-display [&_img]:cursor-zoom-in [&_img]:rounded-xl [&_img]:border [&_img]:border-[rgb(var(--paper-line))] [&_img[data-align='left']]:mr-auto [&_img[data-align='left']]:ml-0 [&_img[data-align='right']]:ml-auto [&_img[data-align='right']]:mr-0"
+        onClick={handleContentClick}
         dangerouslySetInnerHTML={{ __html: renderTipTapHTML(entry.content) }}
       />
 
-      {entry.media.length > 0 && (
+      {galleryMedia.length > 0 && (
         <div className="mt-8">
           <h2 className="mb-4 font-serif-display text-xl text-[rgb(var(--ink))]">Photos</h2>
-          <MediaGallery media={entry.media} />
+          <MediaGallery media={galleryMedia} />
+        </div>
+      )}
+
+      {lightboxSrc && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setLightboxSrc(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <img
+            src={lightboxSrc}
+            alt=""
+            className="max-h-full max-w-full rounded-lg object-contain"
+            onClick={e => e.stopPropagation()}
+          />
+          <button
+            onClick={() => setLightboxSrc(null)}
+            className="absolute right-4 top-4 grid size-10 place-items-center rounded-full bg-white/20 text-white hover:bg-white/30"
+            aria-label="Close"
+          >
+            <X className="size-5" />
+          </button>
         </div>
       )}
 

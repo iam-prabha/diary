@@ -1,6 +1,15 @@
 import { api } from './api'
 
-export async function uploadImage(file: File, onProgress?: (percent: number) => void): Promise<string> {
+export interface UploadResult {
+  url: string
+  publicId: string
+  width: number
+  height: number
+  size: number
+  mimeType: string
+}
+
+export async function uploadImage(file: File, onProgress?: (percent: number) => void): Promise<UploadResult> {
   const sign = await api.get<{
     signature: string
     timestamp: number
@@ -30,15 +39,14 @@ export async function uploadImage(file: File, onProgress?: (percent: number) => 
     xhr.onload = () => {
       if (xhr.status === 200) {
         const { secure_url, public_id, width, height, bytes, format } = JSON.parse(xhr.responseText)
-        api.post('/upload/confirm', {
-          publicId: public_id,
+        resolve({
           url: secure_url,
-          mimeType: `image/${format}`,
-          size: bytes,
+          publicId: public_id,
           width,
           height,
-        }).catch(() => {})
-        resolve(secure_url)
+          size: bytes,
+          mimeType: `image/${format}`,
+        })
       } else {
         reject(new Error('Upload failed'))
       }
@@ -46,4 +54,12 @@ export async function uploadImage(file: File, onProgress?: (percent: number) => 
     xhr.onerror = () => reject(new Error('Upload failed'))
     xhr.send(formData)
   })
+}
+
+export async function deleteImage(publicId: string): Promise<void> {
+  try {
+    await api.delete(`/upload/${encodeURIComponent(publicId)}`)
+  } catch {
+    // best-effort cleanup
+  }
 }

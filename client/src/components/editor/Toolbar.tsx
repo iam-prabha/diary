@@ -55,8 +55,8 @@ export function Toolbar({ editor }: ToolbarProps) {
     input.onchange = async () => {
       const file = input.files?.[0]
       if (file) {
-        const url = await uploadImage(file)
-        editor.chain().focus().setImage({ src: url }).run()
+        const res = await uploadImage(file)
+        editor.chain().focus().setImage({ src: res.url }).run()
       }
     }
     input.click()

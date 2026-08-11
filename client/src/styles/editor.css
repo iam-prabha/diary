@@ -21,6 +21,9 @@
 .ProseMirror pre { background: rgb(var(--ink)); color: rgb(var(--paper)); border-radius: 0.5rem; padding: 1rem; overflow-x: auto; }
 .ProseMirror pre code { background: transparent; color: inherit; padding: 0; }
 .ProseMirror img { max-width: 100%; border-radius: 0.5rem; margin: 1rem auto; display: block; }
+.ProseMirror img[data-align="left"] { margin-left: 0; margin-right: auto; }
+.ProseMirror img[data-align="right"] { margin-left: auto; margin-right: 0; }
+.ProseMirror img.ProseMirror-selectednode { outline: 2px solid rgb(var(--accent)); outline-offset: 2px; }
 .ProseMirror mark { background: rgb(var(--accent-soft)); color: rgb(var(--ink)); border-radius: 0.125rem; padding: 0 0.125rem; }
 .ProseMirror ul[data-type="taskList"] { list-style: none; padding-left: 0; }
 .ProseMirror ul[data-type="taskList"] li { display: flex; gap: 0.5rem; align-items: flex-start; }

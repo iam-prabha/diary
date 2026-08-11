@@ -6,10 +6,9 @@ import { useEntries } from "@/stores/useEntries";
 import { useTags } from "@/stores/useTags";
 import { Editor } from "@/components/editor/Editor";
 import { TagInput } from "@/components/tags/TagInput";
-import { MediaUploader } from "@/components/media/MediaUploader";
 import { Loading } from "@/components/ui/Loading";
-import type { Media } from "@/types";
 import { toaster } from "@/components/ui/Toaster";
+import { mergeMediaIntoContent } from "@/lib/media";
 
 const DRAFT_KEY = "diary-draft";
 
@@ -23,7 +22,6 @@ export function EntryEdit() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState<string[]>([]);
-  const [media, setMedia] = useState<Media[]>([]);
   const [saving, setSaving] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -36,9 +34,8 @@ export function EntryEdit() {
         try {
           const d = JSON.parse(draft);
           setTitle(d.title ?? "");
-          setContent(d.content ?? "");
+          setContent(mergeMediaIntoContent(d.content ?? "", d.media ?? []));
           setTags(d.tags ?? []);
-          setMedia(d.media ?? []);
         } catch {}
       }
       hasLoadedOnce.current = true;
@@ -48,9 +45,8 @@ export function EntryEdit() {
     api.get(`/entries/${id}`).then((res) => {
       const e = res.data;
       setTitle(e.title);
-      setContent(e.content);
+      setContent(mergeMediaIntoContent(e.content, e.media));
       setTags(e.tags.map((t: { tag: { name: string } }) => t.tag.name));
-      setMedia(e.media);
       setLoaded(true);
       hasLoadedOnce.current = true;
     });
@@ -62,18 +58,15 @@ export function EntryEdit() {
 
   useEffect(() => {
     setDirty(true);
-  }, [title, content, tags, media]);
+  }, [title, content, tags]);
 
   useEffect(() => {
     if (!loaded || isEditing) return;
     const timer = setInterval(() => {
-      localStorage.setItem(
-        DRAFT_KEY,
-        JSON.stringify({ title, content, tags, media }),
-      );
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({ title, content, tags }));
     }, 30000);
     return () => clearInterval(timer);
-  }, [loaded, isEditing, title, content, tags, media]);
+  }, [loaded, isEditing, title, content, tags]);
 
   const handleBeforeUnload = useCallback(
     (e: BeforeUnloadEvent) => {
@@ -101,16 +94,6 @@ export function EntryEdit() {
         title: title.trim(),
         content,
         tags,
-        media: media.map(
-          ({ url, mimeType, size, width, height, cloudinaryId }) => ({
-            url,
-            mimeType,
-            size,
-            width,
-            height,
-            cloudinaryId,
-          }),
-        ),
       };
       const res = isEditing
         ? await api.patch(`/entries/${id}`, payload)
@@ -170,10 +153,6 @@ export function EntryEdit() {
 
       <div className="mt-4">
         <Editor content={content} onChange={setContent} />
-      </div>
-
-      <div className="mt-6">
-        <MediaUploader media={media} onChange={setMedia} />
       </div>
     </div>
   );

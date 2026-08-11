@@ -1,12 +1,6 @@
 import { useState } from 'react'
 import type { Media } from '@/types'
-
-export function getOptimizedUrl(url: string, width: number): string {
-  if (url.includes('cloudinary.com')) {
-    return url.replace('/image/upload/', `/image/upload/w_${width},q_auto,f_auto/`)
-  }
-  return url
-}
+import { getOptimizedUrl } from '@/lib/media'
 
 export function MediaGallery({ media }: { media: Media[] }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
