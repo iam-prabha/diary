@@ -161,7 +161,7 @@ If Google creds are missing the server still boots; `/api/auth/google` returns `
 
 1. **Browser verification** of full Google consent → callback → redirect flow (can't be done via curl). Boot `npm run dev`, sign in at `http://localhost:5173`.
 2. **Bulk delete** ("Delete all data") is a stub — decide whether to implement (needs delete entries + media + tags + Cloudinary cleanup).
-3. **Image upload in prod** — `/api/upload/*` now auth-protected + ownership-scoped (hardened 2026-08-11, curl-verified). Remaining: create the `diary_unsigned` upload preset in Cloudinary (account `rvxxoju2`) — live upload test fails with `Upload preset not found` until then.
+3. **Image upload in prod** — ✅ working end-to-end (2026-08-11). `/api/upload/*` auth-protected + ownership-scoped; `diary_unsigned` preset created in Cloudinary; live upload → `secure_url` verified; test asset cleaned up.
 4. **Docker + README** — finish if desired (older plan).
 5. **Rate limiter** is in-memory (per-instance) — fine for single-node, not for multi-instance.
 6. **`TanStack react-virtual`** dependency is installed but not visibly used — confirm or remove.
