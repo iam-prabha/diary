@@ -1,0 +1,1162 @@
+import type * as runtime from "@prisma/client/runtime/client";
+import type * as Prisma from "../internal/prismaNamespace.js";
+/**
+ * Model EntryTag
+ *
+ */
+export type EntryTagModel = runtime.Types.Result.DefaultSelection<Prisma.$EntryTagPayload>;
+export type AggregateEntryTag = {
+    _count: EntryTagCountAggregateOutputType | null;
+    _min: EntryTagMinAggregateOutputType | null;
+    _max: EntryTagMaxAggregateOutputType | null;
+};
+export type EntryTagMinAggregateOutputType = {
+    entryId: string | null;
+    tagId: string | null;
+};
+export type EntryTagMaxAggregateOutputType = {
+    entryId: string | null;
+    tagId: string | null;
+};
+export type EntryTagCountAggregateOutputType = {
+    entryId: number;
+    tagId: number;
+    _all: number;
+};
+export type EntryTagMinAggregateInputType = {
+    entryId?: true;
+    tagId?: true;
+};
+export type EntryTagMaxAggregateInputType = {
+    entryId?: true;
+    tagId?: true;
+};
+export type EntryTagCountAggregateInputType = {
+    entryId?: true;
+    tagId?: true;
+    _all?: true;
+};
+export type EntryTagAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which EntryTag to aggregate.
+     */
+    where?: Prisma.EntryTagWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of EntryTags to fetch.
+     */
+    orderBy?: Prisma.EntryTagOrderByWithRelationInput | Prisma.EntryTagOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: Prisma.EntryTagWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` EntryTags from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` EntryTags.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned EntryTags
+    **/
+    _count?: true | EntryTagCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+    **/
+    _min?: EntryTagMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+    **/
+    _max?: EntryTagMaxAggregateInputType;
+};
+export type GetEntryTagAggregateType<T extends EntryTagAggregateArgs> = {
+    [P in keyof T & keyof AggregateEntryTag]: P extends '_count' | 'count' ? T[P] extends true ? number : Prisma.GetScalarType<T[P], AggregateEntryTag[P]> : Prisma.GetScalarType<T[P], AggregateEntryTag[P]>;
+};
+export type EntryTagGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.EntryTagWhereInput;
+    orderBy?: Prisma.EntryTagOrderByWithAggregationInput | Prisma.EntryTagOrderByWithAggregationInput[];
+    by: Prisma.EntryTagScalarFieldEnum[] | Prisma.EntryTagScalarFieldEnum;
+    having?: Prisma.EntryTagScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: EntryTagCountAggregateInputType | true;
+    _min?: EntryTagMinAggregateInputType;
+    _max?: EntryTagMaxAggregateInputType;
+};
+export type EntryTagGroupByOutputType = {
+    entryId: string;
+    tagId: string;
+    _count: EntryTagCountAggregateOutputType | null;
+    _min: EntryTagMinAggregateOutputType | null;
+    _max: EntryTagMaxAggregateOutputType | null;
+};
+export type GetEntryTagGroupByPayload<T extends EntryTagGroupByArgs> = Prisma.PrismaPromise<Array<Prisma.PickEnumerable<EntryTagGroupByOutputType, T['by']> & {
+    [P in ((keyof T) & (keyof EntryTagGroupByOutputType))]: P extends '_count' ? T[P] extends boolean ? number : Prisma.GetScalarType<T[P], EntryTagGroupByOutputType[P]> : Prisma.GetScalarType<T[P], EntryTagGroupByOutputType[P]>;
+}>>;
+export type EntryTagWhereInput = {
+    AND?: Prisma.EntryTagWhereInput | Prisma.EntryTagWhereInput[];
+    OR?: Prisma.EntryTagWhereInput[];
+    NOT?: Prisma.EntryTagWhereInput | Prisma.EntryTagWhereInput[];
+    entryId?: Prisma.StringFilter<"EntryTag"> | string;
+    tagId?: Prisma.StringFilter<"EntryTag"> | string;
+    entry?: Prisma.XOR<Prisma.EntryScalarRelationFilter, Prisma.EntryWhereInput>;
+    tag?: Prisma.XOR<Prisma.TagScalarRelationFilter, Prisma.TagWhereInput>;
+};
+export type EntryTagOrderByWithRelationInput = {
+    entryId?: Prisma.SortOrder;
+    tagId?: Prisma.SortOrder;
+    entry?: Prisma.EntryOrderByWithRelationInput;
+    tag?: Prisma.TagOrderByWithRelationInput;
+};
+export type EntryTagWhereUniqueInput = Prisma.AtLeast<{
+    entryId_tagId?: Prisma.EntryTagEntryIdTagIdCompoundUniqueInput;
+    AND?: Prisma.EntryTagWhereInput | Prisma.EntryTagWhereInput[];
+    OR?: Prisma.EntryTagWhereInput[];
+    NOT?: Prisma.EntryTagWhereInput | Prisma.EntryTagWhereInput[];
+    entryId?: Prisma.StringFilter<"EntryTag"> | string;
+    tagId?: Prisma.StringFilter<"EntryTag"> | string;
+    entry?: Prisma.XOR<Prisma.EntryScalarRelationFilter, Prisma.EntryWhereInput>;
+    tag?: Prisma.XOR<Prisma.TagScalarRelationFilter, Prisma.TagWhereInput>;
+}, "entryId_tagId">;
+export type EntryTagOrderByWithAggregationInput = {
+    entryId?: Prisma.SortOrder;
+    tagId?: Prisma.SortOrder;
+    _count?: Prisma.EntryTagCountOrderByAggregateInput;
+    _max?: Prisma.EntryTagMaxOrderByAggregateInput;
+    _min?: Prisma.EntryTagMinOrderByAggregateInput;
+};
+export type EntryTagScalarWhereWithAggregatesInput = {
+    AND?: Prisma.EntryTagScalarWhereWithAggregatesInput | Prisma.EntryTagScalarWhereWithAggregatesInput[];
+    OR?: Prisma.EntryTagScalarWhereWithAggregatesInput[];
+    NOT?: Prisma.EntryTagScalarWhereWithAggregatesInput | Prisma.EntryTagScalarWhereWithAggregatesInput[];
+    entryId?: Prisma.StringWithAggregatesFilter<"EntryTag"> | string;
+    tagId?: Prisma.StringWithAggregatesFilter<"EntryTag"> | string;
+};
+export type EntryTagCreateInput = {
+    entry: Prisma.EntryCreateNestedOneWithoutTagsInput;
+    tag: Prisma.TagCreateNestedOneWithoutEntriesInput;
+};
+export type EntryTagUncheckedCreateInput = {
+    entryId: string;
+    tagId: string;
+};
+export type EntryTagUpdateInput = {
+    entry?: Prisma.EntryUpdateOneRequiredWithoutTagsNestedInput;
+    tag?: Prisma.TagUpdateOneRequiredWithoutEntriesNestedInput;
+};
+export type EntryTagUncheckedUpdateInput = {
+    entryId?: Prisma.StringFieldUpdateOperationsInput | string;
+    tagId?: Prisma.StringFieldUpdateOperationsInput | string;
+};
+export type EntryTagCreateManyInput = {
+    entryId: string;
+    tagId: string;
+};
+export type EntryTagUpdateManyMutationInput = {};
+export type EntryTagUncheckedUpdateManyInput = {
+    entryId?: Prisma.StringFieldUpdateOperationsInput | string;
+    tagId?: Prisma.StringFieldUpdateOperationsInput | string;
+};
+export type EntryTagListRelationFilter = {
+    every?: Prisma.EntryTagWhereInput;
+    some?: Prisma.EntryTagWhereInput;
+    none?: Prisma.EntryTagWhereInput;
+};
+export type EntryTagOrderByRelationAggregateInput = {
+    _count?: Prisma.SortOrder;
+};
+export type EntryTagEntryIdTagIdCompoundUniqueInput = {
+    entryId: string;
+    tagId: string;
+};
+export type EntryTagCountOrderByAggregateInput = {
+    entryId?: Prisma.SortOrder;
+    tagId?: Prisma.SortOrder;
+};
+export type EntryTagMaxOrderByAggregateInput = {
+    entryId?: Prisma.SortOrder;
+    tagId?: Prisma.SortOrder;
+};
+export type EntryTagMinOrderByAggregateInput = {
+    entryId?: Prisma.SortOrder;
+    tagId?: Prisma.SortOrder;
+};
+export type EntryTagCreateNestedManyWithoutEntryInput = {
+    create?: Prisma.XOR<Prisma.EntryTagCreateWithoutEntryInput, Prisma.EntryTagUncheckedCreateWithoutEntryInput> | Prisma.EntryTagCreateWithoutEntryInput[] | Prisma.EntryTagUncheckedCreateWithoutEntryInput[];
+    connectOrCreate?: Prisma.EntryTagCreateOrConnectWithoutEntryInput | Prisma.EntryTagCreateOrConnectWithoutEntryInput[];
+    createMany?: Prisma.EntryTagCreateManyEntryInputEnvelope;
+    connect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+};
+export type EntryTagUncheckedCreateNestedManyWithoutEntryInput = {
+    create?: Prisma.XOR<Prisma.EntryTagCreateWithoutEntryInput, Prisma.EntryTagUncheckedCreateWithoutEntryInput> | Prisma.EntryTagCreateWithoutEntryInput[] | Prisma.EntryTagUncheckedCreateWithoutEntryInput[];
+    connectOrCreate?: Prisma.EntryTagCreateOrConnectWithoutEntryInput | Prisma.EntryTagCreateOrConnectWithoutEntryInput[];
+    createMany?: Prisma.EntryTagCreateManyEntryInputEnvelope;
+    connect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+};
+export type EntryTagUpdateManyWithoutEntryNestedInput = {
+    create?: Prisma.XOR<Prisma.EntryTagCreateWithoutEntryInput, Prisma.EntryTagUncheckedCreateWithoutEntryInput> | Prisma.EntryTagCreateWithoutEntryInput[] | Prisma.EntryTagUncheckedCreateWithoutEntryInput[];
+    connectOrCreate?: Prisma.EntryTagCreateOrConnectWithoutEntryInput | Prisma.EntryTagCreateOrConnectWithoutEntryInput[];
+    upsert?: Prisma.EntryTagUpsertWithWhereUniqueWithoutEntryInput | Prisma.EntryTagUpsertWithWhereUniqueWithoutEntryInput[];
+    createMany?: Prisma.EntryTagCreateManyEntryInputEnvelope;
+    set?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    disconnect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    delete?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    connect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    update?: Prisma.EntryTagUpdateWithWhereUniqueWithoutEntryInput | Prisma.EntryTagUpdateWithWhereUniqueWithoutEntryInput[];
+    updateMany?: Prisma.EntryTagUpdateManyWithWhereWithoutEntryInput | Prisma.EntryTagUpdateManyWithWhereWithoutEntryInput[];
+    deleteMany?: Prisma.EntryTagScalarWhereInput | Prisma.EntryTagScalarWhereInput[];
+};
+export type EntryTagUncheckedUpdateManyWithoutEntryNestedInput = {
+    create?: Prisma.XOR<Prisma.EntryTagCreateWithoutEntryInput, Prisma.EntryTagUncheckedCreateWithoutEntryInput> | Prisma.EntryTagCreateWithoutEntryInput[] | Prisma.EntryTagUncheckedCreateWithoutEntryInput[];
+    connectOrCreate?: Prisma.EntryTagCreateOrConnectWithoutEntryInput | Prisma.EntryTagCreateOrConnectWithoutEntryInput[];
+    upsert?: Prisma.EntryTagUpsertWithWhereUniqueWithoutEntryInput | Prisma.EntryTagUpsertWithWhereUniqueWithoutEntryInput[];
+    createMany?: Prisma.EntryTagCreateManyEntryInputEnvelope;
+    set?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    disconnect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    delete?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    connect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    update?: Prisma.EntryTagUpdateWithWhereUniqueWithoutEntryInput | Prisma.EntryTagUpdateWithWhereUniqueWithoutEntryInput[];
+    updateMany?: Prisma.EntryTagUpdateManyWithWhereWithoutEntryInput | Prisma.EntryTagUpdateManyWithWhereWithoutEntryInput[];
+    deleteMany?: Prisma.EntryTagScalarWhereInput | Prisma.EntryTagScalarWhereInput[];
+};
+export type EntryTagCreateNestedManyWithoutTagInput = {
+    create?: Prisma.XOR<Prisma.EntryTagCreateWithoutTagInput, Prisma.EntryTagUncheckedCreateWithoutTagInput> | Prisma.EntryTagCreateWithoutTagInput[] | Prisma.EntryTagUncheckedCreateWithoutTagInput[];
+    connectOrCreate?: Prisma.EntryTagCreateOrConnectWithoutTagInput | Prisma.EntryTagCreateOrConnectWithoutTagInput[];
+    createMany?: Prisma.EntryTagCreateManyTagInputEnvelope;
+    connect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+};
+export type EntryTagUncheckedCreateNestedManyWithoutTagInput = {
+    create?: Prisma.XOR<Prisma.EntryTagCreateWithoutTagInput, Prisma.EntryTagUncheckedCreateWithoutTagInput> | Prisma.EntryTagCreateWithoutTagInput[] | Prisma.EntryTagUncheckedCreateWithoutTagInput[];
+    connectOrCreate?: Prisma.EntryTagCreateOrConnectWithoutTagInput | Prisma.EntryTagCreateOrConnectWithoutTagInput[];
+    createMany?: Prisma.EntryTagCreateManyTagInputEnvelope;
+    connect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+};
+export type EntryTagUpdateManyWithoutTagNestedInput = {
+    create?: Prisma.XOR<Prisma.EntryTagCreateWithoutTagInput, Prisma.EntryTagUncheckedCreateWithoutTagInput> | Prisma.EntryTagCreateWithoutTagInput[] | Prisma.EntryTagUncheckedCreateWithoutTagInput[];
+    connectOrCreate?: Prisma.EntryTagCreateOrConnectWithoutTagInput | Prisma.EntryTagCreateOrConnectWithoutTagInput[];
+    upsert?: Prisma.EntryTagUpsertWithWhereUniqueWithoutTagInput | Prisma.EntryTagUpsertWithWhereUniqueWithoutTagInput[];
+    createMany?: Prisma.EntryTagCreateManyTagInputEnvelope;
+    set?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    disconnect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    delete?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    connect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    update?: Prisma.EntryTagUpdateWithWhereUniqueWithoutTagInput | Prisma.EntryTagUpdateWithWhereUniqueWithoutTagInput[];
+    updateMany?: Prisma.EntryTagUpdateManyWithWhereWithoutTagInput | Prisma.EntryTagUpdateManyWithWhereWithoutTagInput[];
+    deleteMany?: Prisma.EntryTagScalarWhereInput | Prisma.EntryTagScalarWhereInput[];
+};
+export type EntryTagUncheckedUpdateManyWithoutTagNestedInput = {
+    create?: Prisma.XOR<Prisma.EntryTagCreateWithoutTagInput, Prisma.EntryTagUncheckedCreateWithoutTagInput> | Prisma.EntryTagCreateWithoutTagInput[] | Prisma.EntryTagUncheckedCreateWithoutTagInput[];
+    connectOrCreate?: Prisma.EntryTagCreateOrConnectWithoutTagInput | Prisma.EntryTagCreateOrConnectWithoutTagInput[];
+    upsert?: Prisma.EntryTagUpsertWithWhereUniqueWithoutTagInput | Prisma.EntryTagUpsertWithWhereUniqueWithoutTagInput[];
+    createMany?: Prisma.EntryTagCreateManyTagInputEnvelope;
+    set?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    disconnect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    delete?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    connect?: Prisma.EntryTagWhereUniqueInput | Prisma.EntryTagWhereUniqueInput[];
+    update?: Prisma.EntryTagUpdateWithWhereUniqueWithoutTagInput | Prisma.EntryTagUpdateWithWhereUniqueWithoutTagInput[];
+    updateMany?: Prisma.EntryTagUpdateManyWithWhereWithoutTagInput | Prisma.EntryTagUpdateManyWithWhereWithoutTagInput[];
+    deleteMany?: Prisma.EntryTagScalarWhereInput | Prisma.EntryTagScalarWhereInput[];
+};
+export type EntryTagCreateWithoutEntryInput = {
+    tag: Prisma.TagCreateNestedOneWithoutEntriesInput;
+};
+export type EntryTagUncheckedCreateWithoutEntryInput = {
+    tagId: string;
+};
+export type EntryTagCreateOrConnectWithoutEntryInput = {
+    where: Prisma.EntryTagWhereUniqueInput;
+    create: Prisma.XOR<Prisma.EntryTagCreateWithoutEntryInput, Prisma.EntryTagUncheckedCreateWithoutEntryInput>;
+};
+export type EntryTagCreateManyEntryInputEnvelope = {
+    data: Prisma.EntryTagCreateManyEntryInput | Prisma.EntryTagCreateManyEntryInput[];
+    skipDuplicates?: boolean;
+};
+export type EntryTagUpsertWithWhereUniqueWithoutEntryInput = {
+    where: Prisma.EntryTagWhereUniqueInput;
+    update: Prisma.XOR<Prisma.EntryTagUpdateWithoutEntryInput, Prisma.EntryTagUncheckedUpdateWithoutEntryInput>;
+    create: Prisma.XOR<Prisma.EntryTagCreateWithoutEntryInput, Prisma.EntryTagUncheckedCreateWithoutEntryInput>;
+};
+export type EntryTagUpdateWithWhereUniqueWithoutEntryInput = {
+    where: Prisma.EntryTagWhereUniqueInput;
+    data: Prisma.XOR<Prisma.EntryTagUpdateWithoutEntryInput, Prisma.EntryTagUncheckedUpdateWithoutEntryInput>;
+};
+export type EntryTagUpdateManyWithWhereWithoutEntryInput = {
+    where: Prisma.EntryTagScalarWhereInput;
+    data: Prisma.XOR<Prisma.EntryTagUpdateManyMutationInput, Prisma.EntryTagUncheckedUpdateManyWithoutEntryInput>;
+};
+export type EntryTagScalarWhereInput = {
+    AND?: Prisma.EntryTagScalarWhereInput | Prisma.EntryTagScalarWhereInput[];
+    OR?: Prisma.EntryTagScalarWhereInput[];
+    NOT?: Prisma.EntryTagScalarWhereInput | Prisma.EntryTagScalarWhereInput[];
+    entryId?: Prisma.StringFilter<"EntryTag"> | string;
+    tagId?: Prisma.StringFilter<"EntryTag"> | string;
+};
+export type EntryTagCreateWithoutTagInput = {
+    entry: Prisma.EntryCreateNestedOneWithoutTagsInput;
+};
+export type EntryTagUncheckedCreateWithoutTagInput = {
+    entryId: string;
+};
+export type EntryTagCreateOrConnectWithoutTagInput = {
+    where: Prisma.EntryTagWhereUniqueInput;
+    create: Prisma.XOR<Prisma.EntryTagCreateWithoutTagInput, Prisma.EntryTagUncheckedCreateWithoutTagInput>;
+};
+export type EntryTagCreateManyTagInputEnvelope = {
+    data: Prisma.EntryTagCreateManyTagInput | Prisma.EntryTagCreateManyTagInput[];
+    skipDuplicates?: boolean;
+};
+export type EntryTagUpsertWithWhereUniqueWithoutTagInput = {
+    where: Prisma.EntryTagWhereUniqueInput;
+    update: Prisma.XOR<Prisma.EntryTagUpdateWithoutTagInput, Prisma.EntryTagUncheckedUpdateWithoutTagInput>;
+    create: Prisma.XOR<Prisma.EntryTagCreateWithoutTagInput, Prisma.EntryTagUncheckedCreateWithoutTagInput>;
+};
+export type EntryTagUpdateWithWhereUniqueWithoutTagInput = {
+    where: Prisma.EntryTagWhereUniqueInput;
+    data: Prisma.XOR<Prisma.EntryTagUpdateWithoutTagInput, Prisma.EntryTagUncheckedUpdateWithoutTagInput>;
+};
+export type EntryTagUpdateManyWithWhereWithoutTagInput = {
+    where: Prisma.EntryTagScalarWhereInput;
+    data: Prisma.XOR<Prisma.EntryTagUpdateManyMutationInput, Prisma.EntryTagUncheckedUpdateManyWithoutTagInput>;
+};
+export type EntryTagCreateManyEntryInput = {
+    tagId: string;
+};
+export type EntryTagUpdateWithoutEntryInput = {
+    tag?: Prisma.TagUpdateOneRequiredWithoutEntriesNestedInput;
+};
+export type EntryTagUncheckedUpdateWithoutEntryInput = {
+    tagId?: Prisma.StringFieldUpdateOperationsInput | string;
+};
+export type EntryTagUncheckedUpdateManyWithoutEntryInput = {
+    tagId?: Prisma.StringFieldUpdateOperationsInput | string;
+};
+export type EntryTagCreateManyTagInput = {
+    entryId: string;
+};
+export type EntryTagUpdateWithoutTagInput = {
+    entry?: Prisma.EntryUpdateOneRequiredWithoutTagsNestedInput;
+};
+export type EntryTagUncheckedUpdateWithoutTagInput = {
+    entryId?: Prisma.StringFieldUpdateOperationsInput | string;
+};
+export type EntryTagUncheckedUpdateManyWithoutTagInput = {
+    entryId?: Prisma.StringFieldUpdateOperationsInput | string;
+};
+export type EntryTagSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    entryId?: boolean;
+    tagId?: boolean;
+    entry?: boolean | Prisma.EntryDefaultArgs<ExtArgs>;
+    tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["entryTag"]>;
+export type EntryTagSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    entryId?: boolean;
+    tagId?: boolean;
+    entry?: boolean | Prisma.EntryDefaultArgs<ExtArgs>;
+    tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["entryTag"]>;
+export type EntryTagSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    entryId?: boolean;
+    tagId?: boolean;
+    entry?: boolean | Prisma.EntryDefaultArgs<ExtArgs>;
+    tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["entryTag"]>;
+export type EntryTagSelectScalar = {
+    entryId?: boolean;
+    tagId?: boolean;
+};
+export type EntryTagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"entryId" | "tagId", ExtArgs["result"]["entryTag"]>;
+export type EntryTagInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    entry?: boolean | Prisma.EntryDefaultArgs<ExtArgs>;
+    tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>;
+};
+export type EntryTagIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    entry?: boolean | Prisma.EntryDefaultArgs<ExtArgs>;
+    tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>;
+};
+export type EntryTagIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    entry?: boolean | Prisma.EntryDefaultArgs<ExtArgs>;
+    tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>;
+};
+export type $EntryTagPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    name: "EntryTag";
+    objects: {
+        entry: Prisma.$EntryPayload<ExtArgs>;
+        tag: Prisma.$TagPayload<ExtArgs>;
+    };
+    scalars: runtime.Types.Extensions.GetPayloadResult<{
+        entryId: string;
+        tagId: string;
+    }, ExtArgs["result"]["entryTag"]>;
+    composites: {};
+};
+export type EntryTagGetPayload<S extends boolean | null | undefined | EntryTagDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$EntryTagPayload, S>;
+export type EntryTagCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = Omit<EntryTagFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: EntryTagCountAggregateInputType | true;
+};
+export interface EntryTagDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: {
+        types: Prisma.TypeMap<ExtArgs>['model']['EntryTag'];
+        meta: {
+            name: 'EntryTag';
+        };
+    };
+    /**
+     * Find zero or one EntryTag that matches the filter.
+     * @param {EntryTagFindUniqueArgs} args - Arguments to find a EntryTag
+     * @example
+     * // Get one EntryTag
+     * const entryTag = await prisma.entryTag.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EntryTagFindUniqueArgs>(args: Prisma.SelectSubset<T, EntryTagFindUniqueArgs<ExtArgs>>): Prisma.Prisma__EntryTagClient<runtime.Types.Result.GetResult<Prisma.$EntryTagPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find one EntryTag that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EntryTagFindUniqueOrThrowArgs} args - Arguments to find a EntryTag
+     * @example
+     * // Get one EntryTag
+     * const entryTag = await prisma.entryTag.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EntryTagFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, EntryTagFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__EntryTagClient<runtime.Types.Result.GetResult<Prisma.$EntryTagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first EntryTag that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryTagFindFirstArgs} args - Arguments to find a EntryTag
+     * @example
+     * // Get one EntryTag
+     * const entryTag = await prisma.entryTag.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EntryTagFindFirstArgs>(args?: Prisma.SelectSubset<T, EntryTagFindFirstArgs<ExtArgs>>): Prisma.Prisma__EntryTagClient<runtime.Types.Result.GetResult<Prisma.$EntryTagPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first EntryTag that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryTagFindFirstOrThrowArgs} args - Arguments to find a EntryTag
+     * @example
+     * // Get one EntryTag
+     * const entryTag = await prisma.entryTag.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EntryTagFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, EntryTagFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__EntryTagClient<runtime.Types.Result.GetResult<Prisma.$EntryTagPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find zero or more EntryTags that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryTagFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EntryTags
+     * const entryTags = await prisma.entryTag.findMany()
+     *
+     * // Get first 10 EntryTags
+     * const entryTags = await prisma.entryTag.findMany({ take: 10 })
+     *
+     * // Only select the `entryId`
+     * const entryTagWithEntryIdOnly = await prisma.entryTag.findMany({ select: { entryId: true } })
+     *
+     */
+    findMany<T extends EntryTagFindManyArgs>(args?: Prisma.SelectSubset<T, EntryTagFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntryTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
+    /**
+     * Create a EntryTag.
+     * @param {EntryTagCreateArgs} args - Arguments to create a EntryTag.
+     * @example
+     * // Create one EntryTag
+     * const EntryTag = await prisma.entryTag.create({
+     *   data: {
+     *     // ... data to create a EntryTag
+     *   }
+     * })
+     *
+     */
+    create<T extends EntryTagCreateArgs>(args: Prisma.SelectSubset<T, EntryTagCreateArgs<ExtArgs>>): Prisma.Prisma__EntryTagClient<runtime.Types.Result.GetResult<Prisma.$EntryTagPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Create many EntryTags.
+     * @param {EntryTagCreateManyArgs} args - Arguments to create many EntryTags.
+     * @example
+     * // Create many EntryTags
+     * const entryTag = await prisma.entryTag.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends EntryTagCreateManyArgs>(args?: Prisma.SelectSubset<T, EntryTagCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Create many EntryTags and returns the data saved in the database.
+     * @param {EntryTagCreateManyAndReturnArgs} args - Arguments to create many EntryTags.
+     * @example
+     * // Create many EntryTags
+     * const entryTag = await prisma.entryTag.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many EntryTags and only return the `entryId`
+     * const entryTagWithEntryIdOnly = await prisma.entryTag.createManyAndReturn({
+     *   select: { entryId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends EntryTagCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, EntryTagCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntryTagPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Delete a EntryTag.
+     * @param {EntryTagDeleteArgs} args - Arguments to delete one EntryTag.
+     * @example
+     * // Delete one EntryTag
+     * const EntryTag = await prisma.entryTag.delete({
+     *   where: {
+     *     // ... filter to delete one EntryTag
+     *   }
+     * })
+     *
+     */
+    delete<T extends EntryTagDeleteArgs>(args: Prisma.SelectSubset<T, EntryTagDeleteArgs<ExtArgs>>): Prisma.Prisma__EntryTagClient<runtime.Types.Result.GetResult<Prisma.$EntryTagPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Update one EntryTag.
+     * @param {EntryTagUpdateArgs} args - Arguments to update one EntryTag.
+     * @example
+     * // Update one EntryTag
+     * const entryTag = await prisma.entryTag.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends EntryTagUpdateArgs>(args: Prisma.SelectSubset<T, EntryTagUpdateArgs<ExtArgs>>): Prisma.Prisma__EntryTagClient<runtime.Types.Result.GetResult<Prisma.$EntryTagPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Delete zero or more EntryTags.
+     * @param {EntryTagDeleteManyArgs} args - Arguments to filter EntryTags to delete.
+     * @example
+     * // Delete a few EntryTags
+     * const { count } = await prisma.entryTag.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends EntryTagDeleteManyArgs>(args?: Prisma.SelectSubset<T, EntryTagDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more EntryTags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryTagUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EntryTags
+     * const entryTag = await prisma.entryTag.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends EntryTagUpdateManyArgs>(args: Prisma.SelectSubset<T, EntryTagUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more EntryTags and returns the data updated in the database.
+     * @param {EntryTagUpdateManyAndReturnArgs} args - Arguments to update many EntryTags.
+     * @example
+     * // Update many EntryTags
+     * const entryTag = await prisma.entryTag.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more EntryTags and only return the `entryId`
+     * const entryTagWithEntryIdOnly = await prisma.entryTag.updateManyAndReturn({
+     *   select: { entryId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends EntryTagUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, EntryTagUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntryTagPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Create or update one EntryTag.
+     * @param {EntryTagUpsertArgs} args - Arguments to update or create a EntryTag.
+     * @example
+     * // Update or create a EntryTag
+     * const entryTag = await prisma.entryTag.upsert({
+     *   create: {
+     *     // ... data to create a EntryTag
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EntryTag we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EntryTagUpsertArgs>(args: Prisma.SelectSubset<T, EntryTagUpsertArgs<ExtArgs>>): Prisma.Prisma__EntryTagClient<runtime.Types.Result.GetResult<Prisma.$EntryTagPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Count the number of EntryTags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryTagCountArgs} args - Arguments to filter EntryTags to count.
+     * @example
+     * // Count the number of EntryTags
+     * const count = await prisma.entryTag.count({
+     *   where: {
+     *     // ... the filter for the EntryTags we want to count
+     *   }
+     * })
+    **/
+    count<T extends EntryTagCountArgs>(args?: Prisma.Subset<T, EntryTagCountArgs>): Prisma.PrismaPromise<T extends runtime.Types.Utils.Record<'select', any> ? T['select'] extends true ? number : Prisma.GetScalarType<T['select'], EntryTagCountAggregateOutputType> : number>;
+    /**
+     * Allows you to perform aggregations operations on a EntryTag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryTagAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EntryTagAggregateArgs>(args: Prisma.Subset<T, EntryTagAggregateArgs>): Prisma.PrismaPromise<GetEntryTagAggregateType<T>>;
+    /**
+     * Group by EntryTag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryTagGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+    **/
+    groupBy<T extends EntryTagGroupByArgs, HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>, OrderByArg extends Prisma.True extends HasSelectOrTake ? {
+        orderBy: EntryTagGroupByArgs['orderBy'];
+    } : {
+        orderBy?: EntryTagGroupByArgs['orderBy'];
+    }, OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>, ByFields extends Prisma.MaybeTupleToUnion<T['by']>, ByValid extends Prisma.Has<ByFields, OrderFields>, HavingFields extends Prisma.GetHavingFields<T['having']>, HavingValid extends Prisma.Has<ByFields, HavingFields>, ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False, InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.` : HavingValid extends Prisma.False ? {
+        [P in HavingFields]: P extends ByFields ? never : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".` : [
+            Error,
+            'Field ',
+            P,
+            ` in "having" needs to be provided in "by"`
+        ];
+    }[HavingFields] : 'take' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "take", you also need to provide "orderBy"' : 'skip' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "skip", you also need to provide "orderBy"' : ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields]>(args: Prisma.SubsetIntersection<T, EntryTagGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEntryTagGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the EntryTag model
+     */
+    readonly fields: EntryTagFieldRefs;
+}
+/**
+ * The delegate class that acts as a "Promise-like" for EntryTag.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
+export interface Prisma__EntryTagClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    entry<T extends Prisma.EntryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EntryDefaultArgs<ExtArgs>>): Prisma.Prisma__EntryClient<runtime.Types.Result.GetResult<Prisma.$EntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    tag<T extends Prisma.TagDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TagDefaultArgs<ExtArgs>>): Prisma.Prisma__TagClient<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): runtime.Types.Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
+}
+/**
+ * Fields of the EntryTag model
+ */
+export interface EntryTagFieldRefs {
+    readonly entryId: Prisma.FieldRef<"EntryTag", 'String'>;
+    readonly tagId: Prisma.FieldRef<"EntryTag", 'String'>;
+}
+/**
+ * EntryTag findUnique
+ */
+export type EntryTagFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagInclude<ExtArgs> | null;
+    /**
+     * Filter, which EntryTag to fetch.
+     */
+    where: Prisma.EntryTagWhereUniqueInput;
+};
+/**
+ * EntryTag findUniqueOrThrow
+ */
+export type EntryTagFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagInclude<ExtArgs> | null;
+    /**
+     * Filter, which EntryTag to fetch.
+     */
+    where: Prisma.EntryTagWhereUniqueInput;
+};
+/**
+ * EntryTag findFirst
+ */
+export type EntryTagFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagInclude<ExtArgs> | null;
+    /**
+     * Filter, which EntryTag to fetch.
+     */
+    where?: Prisma.EntryTagWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of EntryTags to fetch.
+     */
+    orderBy?: Prisma.EntryTagOrderByWithRelationInput | Prisma.EntryTagOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for EntryTags.
+     */
+    cursor?: Prisma.EntryTagWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` EntryTags from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` EntryTags.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of EntryTags.
+     */
+    distinct?: Prisma.EntryTagScalarFieldEnum | Prisma.EntryTagScalarFieldEnum[];
+};
+/**
+ * EntryTag findFirstOrThrow
+ */
+export type EntryTagFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagInclude<ExtArgs> | null;
+    /**
+     * Filter, which EntryTag to fetch.
+     */
+    where?: Prisma.EntryTagWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of EntryTags to fetch.
+     */
+    orderBy?: Prisma.EntryTagOrderByWithRelationInput | Prisma.EntryTagOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for EntryTags.
+     */
+    cursor?: Prisma.EntryTagWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` EntryTags from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` EntryTags.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of EntryTags.
+     */
+    distinct?: Prisma.EntryTagScalarFieldEnum | Prisma.EntryTagScalarFieldEnum[];
+};
+/**
+ * EntryTag findMany
+ */
+export type EntryTagFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagInclude<ExtArgs> | null;
+    /**
+     * Filter, which EntryTags to fetch.
+     */
+    where?: Prisma.EntryTagWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of EntryTags to fetch.
+     */
+    orderBy?: Prisma.EntryTagOrderByWithRelationInput | Prisma.EntryTagOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing EntryTags.
+     */
+    cursor?: Prisma.EntryTagWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` EntryTags from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` EntryTags.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of EntryTags.
+     */
+    distinct?: Prisma.EntryTagScalarFieldEnum | Prisma.EntryTagScalarFieldEnum[];
+};
+/**
+ * EntryTag create
+ */
+export type EntryTagCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a EntryTag.
+     */
+    data: Prisma.XOR<Prisma.EntryTagCreateInput, Prisma.EntryTagUncheckedCreateInput>;
+};
+/**
+ * EntryTag createMany
+ */
+export type EntryTagCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EntryTags.
+     */
+    data: Prisma.EntryTagCreateManyInput | Prisma.EntryTagCreateManyInput[];
+    skipDuplicates?: boolean;
+};
+/**
+ * EntryTag createManyAndReturn
+ */
+export type EntryTagCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * The data used to create many EntryTags.
+     */
+    data: Prisma.EntryTagCreateManyInput | Prisma.EntryTagCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagIncludeCreateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * EntryTag update
+ */
+export type EntryTagUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a EntryTag.
+     */
+    data: Prisma.XOR<Prisma.EntryTagUpdateInput, Prisma.EntryTagUncheckedUpdateInput>;
+    /**
+     * Choose, which EntryTag to update.
+     */
+    where: Prisma.EntryTagWhereUniqueInput;
+};
+/**
+ * EntryTag updateMany
+ */
+export type EntryTagUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EntryTags.
+     */
+    data: Prisma.XOR<Prisma.EntryTagUpdateManyMutationInput, Prisma.EntryTagUncheckedUpdateManyInput>;
+    /**
+     * Filter which EntryTags to update
+     */
+    where?: Prisma.EntryTagWhereInput;
+    /**
+     * Limit how many EntryTags to update.
+     */
+    limit?: number;
+};
+/**
+ * EntryTag updateManyAndReturn
+ */
+export type EntryTagUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * The data used to update EntryTags.
+     */
+    data: Prisma.XOR<Prisma.EntryTagUpdateManyMutationInput, Prisma.EntryTagUncheckedUpdateManyInput>;
+    /**
+     * Filter which EntryTags to update
+     */
+    where?: Prisma.EntryTagWhereInput;
+    /**
+     * Limit how many EntryTags to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagIncludeUpdateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * EntryTag upsert
+ */
+export type EntryTagUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the EntryTag to update in case it exists.
+     */
+    where: Prisma.EntryTagWhereUniqueInput;
+    /**
+     * In case the EntryTag found by the `where` argument doesn't exist, create a new EntryTag with this data.
+     */
+    create: Prisma.XOR<Prisma.EntryTagCreateInput, Prisma.EntryTagUncheckedCreateInput>;
+    /**
+     * In case the EntryTag was found with the provided `where` argument, update it with this data.
+     */
+    update: Prisma.XOR<Prisma.EntryTagUpdateInput, Prisma.EntryTagUncheckedUpdateInput>;
+};
+/**
+ * EntryTag delete
+ */
+export type EntryTagDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagInclude<ExtArgs> | null;
+    /**
+     * Filter which EntryTag to delete.
+     */
+    where: Prisma.EntryTagWhereUniqueInput;
+};
+/**
+ * EntryTag deleteMany
+ */
+export type EntryTagDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which EntryTags to delete
+     */
+    where?: Prisma.EntryTagWhereInput;
+    /**
+     * Limit how many EntryTags to delete.
+     */
+    limit?: number;
+};
+/**
+ * EntryTag without action
+ */
+export type EntryTagDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryTag
+     */
+    select?: Prisma.EntryTagSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the EntryTag
+     */
+    omit?: Prisma.EntryTagOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EntryTagInclude<ExtArgs> | null;
+};
+//# sourceMappingURL=EntryTag.d.ts.map

@@ -1,0 +1,123 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  :root {
+    --paper: 255 254 252;
+    --paper-card: 252 251 246;
+    --paper-line: 233 230 218;
+    --ink: 42 37 33;
+    --ink-soft: 76 71 66;
+    --ink-faint: 120 114 106;
+    --accent: 196 120 94;
+    --accent-soft: 242 229 220;
+    --success: 94 196 120;
+    --danger: 220 90 90;
+  }
+
+  .dark {
+    --paper: 24 22 26;
+    --paper-card: 31 29 35;
+    --paper-line: 48 45 54;
+    --ink: 240 239 244;
+    --ink-soft: 196 193 204;
+    --ink-faint: 148 145 156;
+    --accent: 212 152 120;
+    --accent-soft: 66 50 42;
+    --success: 110 210 140;
+    --danger: 235 120 120;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    color: rgb(var(--ink));
+    background-color: rgb(var(--paper));
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .paper-texture {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  .dark .paper-texture {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  .ruled-paper {
+    background-image:
+      repeating-linear-gradient(
+        transparent 0px,
+        transparent 30px,
+        rgb(var(--paper-line)) 30px,
+        rgb(var(--paper-line)) 31px
+      );
+  }
+
+  .font-serif-display {
+    font-family: var(--font-serif);
+  }
+
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* EntryView rendered content — map Tailwind typography colors to theme tokens
+   so notes stay readable in both light and dark mode. */
+.prose {
+  --tw-prose-body: rgb(var(--ink));
+  --tw-prose-headings: rgb(var(--ink));
+  --tw-prose-lead: rgb(var(--ink-soft));
+  --tw-prose-links: rgb(var(--accent));
+  --tw-prose-bold: rgb(var(--ink));
+  --tw-prose-counters: rgb(var(--ink-soft));
+  --tw-prose-bullets: rgb(var(--ink-soft));
+  --tw-prose-hr: rgb(var(--paper-line));
+  --tw-prose-quotes: rgb(var(--ink-soft));
+  --tw-prose-quote-borders: rgb(var(--accent));
+  --tw-prose-captions: rgb(var(--ink-faint));
+  --tw-prose-code: rgb(var(--ink));
+  --tw-prose-pre-code: rgb(var(--paper));
+  --tw-prose-pre-bg: rgb(var(--ink));
+  --tw-prose-th-borders: rgb(var(--paper-line));
+  --tw-prose-td-borders: rgb(var(--paper-line));
+  --tw-prose-invert-body: rgb(var(--ink));
+  --tw-prose-invert-headings: rgb(var(--ink));
+  --tw-prose-invert-links: rgb(var(--accent));
+  --tw-prose-invert-bold: rgb(var(--ink));
+  --tw-prose-invert-code: rgb(var(--ink));
+  --tw-prose-invert-pre-code: rgb(var(--paper));
+  --tw-prose-invert-pre-bg: rgb(var(--ink));
+  --tw-prose-invert-hr: rgb(var(--paper-line));
+  --tw-prose-invert-quotes: rgb(var(--ink-soft));
+  --tw-prose-invert-quote-borders: rgb(var(--accent));
+  --tw-prose-invert-captions: rgb(var(--ink-faint));
+  --tw-prose-invert-counters: rgb(var(--ink-soft));
+  --tw-prose-invert-bullets: rgb(var(--ink-soft));
+  --tw-prose-invert-th-borders: rgb(var(--paper-line));
+  --tw-prose-invert-td-borders: rgb(var(--paper-line));
+}
+
+.prose blockquote {
+  border-left-color: rgb(var(--accent));
+}

@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  googleId  String?  @unique
+  name      String?
+  avatarUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  entries   Entry[]
+
+  @@map("users")
+}
+
+model Entry {
+  id          String     @id @default(cuid())
+  title       String
+  content     String     @db.Text
+  contentText String     @db.Text
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  publishedAt DateTime?
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tags        EntryTag[]
+  media       Media[]
+
+  @@index([userId, createdAt])
+  @@index([userId, publishedAt])
+  @@map("entries")
+}
+
+model Tag {
+  id      String      @id @default(cuid())
+  name    String      @unique
+  color   String?
+  entries EntryTag[]
+
+  @@map("tags")
+}
+
+model EntryTag {
+  entryId String
+  tagId   String
+  entry   Entry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  tag     Tag   @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([entryId, tagId])
+  @@map("entry_tags")
+}
+
+model Media {
+  id           String   @id @default(cuid())
+  entryId      String?
+  entry        Entry?   @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  url          String
+  mimeType     String
+  size         Int
+  width        Int?
+  height       Int?
+  cloudinaryId String   @unique
+  createdAt    DateTime @default(now())
+
+  @@index([entryId])
+  @@map("media")
+}
