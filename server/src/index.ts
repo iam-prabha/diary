@@ -42,6 +42,10 @@ app.use('/api/entries', entriesRouter)
 app.use('/api/tags', tagsRouter)
 app.use('/api/upload', uploadRouter)
 
+app.get('/', (_req, res) => {
+  res.send('Welcome to the Diary API!')
+})
+
 app.use((_req, res) => {
   res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Route not found' } })
 })
@@ -54,10 +58,6 @@ if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
     console.log(`📊 Health: http://localhost:${PORT}/api/health`)
   })
 }
-
-app.get('/', (_req, res) => {
-  res.send('Welcome to the API server!')
-})
 
 process.on('SIGTERM', async () => {
   console.log('SIGTERM received, shutting down gracefully')

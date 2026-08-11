@@ -28,8 +28,10 @@ export interface EntryListResponse {
   hasMore?: boolean;
 }
 
+const BASE = (import.meta.env.VITE_API_URL || "/api").replace(/\/+$/, "");
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "/api",
+  baseURL: BASE,
   timeout: 15000,
   withCredentials: true,
 });
@@ -73,7 +75,7 @@ export interface UploadSignParams {
 export const authApi = {
   me: () => api.get<{ user: User }>("/auth/me", { silent: true }).then((r) => r.data.user),
   logout: () => api.post("/auth/logout", undefined, { silent: true }),
-  googleUrl: () => `${import.meta.env.VITE_API_URL || "/api"}/auth/google`,
+  googleUrl: () => `${api.defaults.baseURL}/auth/google`,
 };
 
 export const uploadApi = {
