@@ -161,7 +161,7 @@ If Google creds are missing the server still boots; `/api/auth/google` returns `
 
 1. **Browser verification** of full Google consent → callback → redirect flow (can't be done via curl). Boot `npm run dev`, sign in at `http://localhost:5173`.
 2. **Bulk delete** ("Delete all data") is a stub — decide whether to implement (needs delete entries + media + tags + Cloudinary cleanup).
-3. **`/api/upload/sign` + `/confirm`** re-verify end-to-end (was working before auth migration; upload routes are NOT auth-protected).
+3. **Image upload in prod** — `/api/upload/*` now auth-protected + ownership-scoped (hardened 2026-08-11, curl-verified). Remaining: create the `diary_unsigned` upload preset in Cloudinary (account `rvxxoju2`) — live upload test fails with `Upload preset not found` until then.
 4. **Docker + README** — finish if desired (older plan).
 5. **Rate limiter** is in-memory (per-instance) — fine for single-node, not for multi-instance.
 6. **`TanStack react-virtual`** dependency is installed but not visibly used — confirm or remove.
@@ -192,6 +192,6 @@ Add prod redirect URI `https://diary-api.vercel.app/api/auth/google/callback` in
 
 ## 11. Changelog (recent)
 
-- **2026-08-11**: Vercel deploy prep — `app.listen` gated on `VERCEL`, `client/vercel.json` SPA rewrite, `engines.node>=22`, deployment section added here. Fixed `fetchEntries(true)` using a stale `page` (returning to `/diary` showed EmptyState). Renamed remaining PaperJournal refs → Diary.
+- **2026-08-11**: Vercel deploy prep — `app.listen` gated on `VERCEL`, `client/vercel.json` SPA rewrite, `engines.node>=22`, deployment section added here. Fixed `fetchEntries(true)` using a stale `page` (returning to `/diary` showed EmptyState). Renamed remaining PaperJournal refs → Diary. Deployed to Vercel (`diary-client-two` + `diary-api-beta`); fixed client base URL (missing `/api`) + CORS trailing-slash + `GOOGLE_REDIRECT_URI` via env. Hardened `/api/upload/*` with `requireAuth` + entry/media ownership checks (curl-verified 401/201/204/404). Pending: create `diary_unsigned` Cloudinary preset.
 - **2026-08-10**: Migrated from single demo user → real Google OAuth (PKCE, signed cookie, auto-seed on first login). Schema `+googleId/avatarUrl`; migration applied; demo-user code deleted. Docs consolidated into PRD.md / ui-design-spec.md / track.md.
 - **Earlier**: Monorepo scaffold → Tailwind v4 paper theme → Prisma/Neon + Cloudinary → TipTap editor → entries/tags/search/export → theme/settings.
