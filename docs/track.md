@@ -167,7 +167,31 @@ If Google creds are missing the server still boots; `/api/auth/google` returns `
 6. **`TanStack react-virtual`** dependency is installed but not visibly used — confirm or remove.
 7. `App.css` may hold unused legacy styles — cleanup pass.
 
-## 10. Changelog (recent)
+## 10. Deployment (Vercel)
 
+Two Vercel projects from one repo (matches the cross-origin `sameSite=none` cookie design). Client and API are different origins but same-site (`*.vercel.app`), so credentialed cookies work with zero cookie-domain tricks.
+
+### Project A — API (`diary-api`), rootDirectory = `server`
+- Build command: `npx prisma generate && npx prisma migrate deploy`
+- Framework: Other (Express auto-detected via default-export in `src/index.ts`; `app.listen` gated off by `VERCEL`).
+- Env: `DATABASE_URL` (Neon pooled, `sslmode=require`), `CLOUDINARY_CLOUD_NAME/API_KEY/API_SECRET`, `CORS_ORIGIN=https://diary.vercel.app`, `GOOGLE_CLIENT_ID/SECRET`, `GOOGLE_REDIRECT_URI=https://diary-api.vercel.app/api/auth/google/callback`, `SESSION_SECRET`, `CLIENT_URL=https://diary.vercel.app`, `NODE_ENV=production`.
+- Verify: `curl https://diary-api.vercel.app/api/health` → `200 database: connected`.
+
+### Project B — Client (`diary`), rootDirectory = `client`
+- Framework preset: Vite; Build: `npm run build`; Output dir: `dist`; SPA fallback via `client/vercel.json`.
+- Env: `VITE_API_URL=https://diary-api.vercel.app/api`.
+- Verify: `/`, `/diary`, `/login`, `/new` all return `index.html`; signed-in calls hit the API.
+
+### Google OAuth
+Add prod redirect URI `https://diary-api.vercel.app/api/auth/google/callback` in Google console. Swap to custom domains (`diary.example.com` / `api.diary.example.com`) later by updating `CORS_ORIGIN`, `CLIENT_URL`, `GOOGLE_REDIRECT_URI`.
+
+### Known deploy gotchas
+- `express.static()` is ignored on Vercel — client is a separate static project (never rely on API to serve it).
+- Rate limiter is in-memory (per function instance) — fine single-user/small.
+- `/api/upload/sign` + `/confirm` are **not auth-protected** — hardening pass later.
+
+## 11. Changelog (recent)
+
+- **2026-08-11**: Vercel deploy prep — `app.listen` gated on `VERCEL`, `client/vercel.json` SPA rewrite, `engines.node>=22`, deployment section added here. Fixed `fetchEntries(true)` using a stale `page` (returning to `/diary` showed EmptyState). Renamed remaining PaperJournal refs → Diary.
 - **2026-08-10**: Migrated from single demo user → real Google OAuth (PKCE, signed cookie, auto-seed on first login). Schema `+googleId/avatarUrl`; migration applied; demo-user code deleted. Docs consolidated into PRD.md / ui-design-spec.md / track.md.
 - **Earlier**: Monorepo scaffold → Tailwind v4 paper theme → Prisma/Neon + Cloudinary → TipTap editor → entries/tags/search/export → theme/settings.
