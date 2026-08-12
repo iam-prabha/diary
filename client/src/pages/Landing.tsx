@@ -48,7 +48,7 @@ export function Landing() {
       <nav className="border-b border-[rgb(var(--paper-line))] bg-[rgb(var(--paper))]/90 backdrop-blur-sm">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <div className="flex items-center gap-2">
-            <span className="font-serif-display text-2xl text-[rgb(var(--accent))]">✦</span>
+            <span className="font-serif-display text-2xl text-[rgb(var(--accent))] ">✦</span>
             <span className="font-serif-display text-xl tracking-wide text-[rgb(var(--ink))]">
               Diary
             </span>
@@ -64,10 +64,10 @@ export function Landing() {
 
       <main className="flex-1">
         <section className="mx-auto max-w-3xl px-4 pb-16 pt-20 text-center">
-          <div className="mb-6 grid size-16 place-items-center rounded-full bg-[rgb(var(--accent-soft))]">
+          <div className="mx-auto mb-6 grid size-16 place-items-center rounded-full bg-[rgb(var(--accent-soft))]">
             <span className="font-serif-display text-3xl text-[rgb(var(--accent))]">✦</span>
           </div>
-          <h1 className="font-serif-display text-5xl leading-tight text-[rgb(var(--ink))] sm:text-6xl">
+          <h1 className="mx-autofont-serif-display text-5xl leading-tight text-[rgb(var(--ink))] sm:text-6xl">
             Start your thoughts into words
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-[rgb(var(--ink-soft))]">
@@ -104,7 +104,7 @@ export function Landing() {
                   key={f.title}
                   className="rounded-2xl border border-[rgb(var(--paper-line))] bg-[rgb(var(--paper-card))] p-6 shadow-sm"
                 >
-                  <div className="mb-4 grid size-12 place-items-center rounded-full bg-[rgb(var(--accent-soft))]">
+                  <div className="mx-auto mb-4 grid size-12 place-items-center rounded-full bg-[rgb(var(--accent-soft))]">
                     <f.icon className="size-6 text-[rgb(var(--accent))]" />
                   </div>
                   <h3 className="mb-2 font-serif-display text-xl text-[rgb(var(--ink))]">
@@ -126,7 +126,7 @@ export function Landing() {
           <div className="grid gap-8 sm:grid-cols-3">
             {steps.map((s, i) => (
               <div key={s.title} className="relative text-center">
-                <div className="mb-4 grid size-12 place-items-center rounded-full border border-[rgb(var(--paper-line))] bg-[rgb(var(--paper-card))] text-[rgb(var(--accent))]">
+                <div className="mx-auto mb-4 grid size-12 place-items-center rounded-full border border-[rgb(var(--paper-line))] bg-[rgb(var(--paper-card))] text-[rgb(var(--accent))]">
                   <s.icon className="size-6" />
                 </div>
                 <span className="mb-1 block text-xs font-semibold uppercase tracking-wider text-[rgb(var(--ink-faint))]">
