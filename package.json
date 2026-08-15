@@ -18,7 +18,8 @@
     "db:migrate": "npm run db:migrate --workspace=server",
     "db:seed": "npm run db:seed --workspace=server",
     "lint": "npm run lint --workspaces",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "npm run test --workspaces"
   },
   "keywords": [],
   "author": "iamprabha",

@@ -4,6 +4,11 @@ const requests = new Map<string, { count: number; resetAt: number }>()
 
 export const rateLimit = (maxRequests = 100, windowMs = 60_000) => {
   return (req: Request, res: Response, next: NextFunction) => {
+    if (process.env.NODE_ENV === 'test') {
+      next()
+      return
+    }
+
     const ip = req.ip || 'unknown'
     const now = Date.now()
     const record = requests.get(ip)

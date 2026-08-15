@@ -1,6 +1,10 @@
 const requests = new Map();
 export const rateLimit = (maxRequests = 100, windowMs = 60_000) => {
     return (req, res, next) => {
+        if (process.env.NODE_ENV === 'test') {
+            next();
+            return;
+        }
         const ip = req.ip || 'unknown';
         const now = Date.now();
         const record = requests.get(ip);
